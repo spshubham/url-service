@@ -13,7 +13,7 @@ cron.schedule("*/1 * * * *", function() {
 
         for(let i = 0;i<res.length;i++)
         {
-            console.log(min%res[i].frequency == 0);
+
             if(min%res[i].frequency == 0)
             {
                 const resp = await axios.get(res[i].url_name)

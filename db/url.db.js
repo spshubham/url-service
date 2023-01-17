@@ -10,7 +10,7 @@ exports.addUrl = async(body, user_id) =>{
         let url = new Url(body);
         const res = await url.save(url)
         return res;
-    } catch (error) {console.log(error);
+    } catch (error) {
         if(error.code == 11000)
             throw Response.UserAlreayExist;
         else throw Response.UnexpectedError;
@@ -27,7 +27,7 @@ exports.updateUrl = async(body, user_id, url_id) =>{
          console.log(query);
         let res = await Url.findOneAndUpdate({_id:url_id,user_id:user_id},query)
         return res;
-    } catch (error) {console.log(error);
+    } catch (error) {
         if(error.code == 11000)
             throw Response.UserAlreayExist;
         else throw Response.UnexpectedError;
@@ -38,7 +38,7 @@ exports.listUrl = async(user_id) =>{
     try {
         let res = await Url.find({user_id:ObjectId(user_id)}).select({"_id":1,"url_name":1})
         return res
-    } catch (error) {console.log(error);
+    } catch (error) {
         if(error.code == 11000)
             throw Response.UserAlreayExist;
         else throw Response.UnexpectedError;
@@ -50,7 +50,7 @@ exports.removeUrl = async(user_id, url_id) =>{
     try {
         let res = await Url.deleteOne({_id:url_id,user_id:user_id})
         return res;
-    } catch (error) {console.log(error);
+    } catch (error) {
         if(error.code == 11000)
             throw Response.UserAlreayExist;
         else throw Response.UnexpectedError;
@@ -66,7 +66,7 @@ exports.trackUrl = async(user_id, url_id) =>{
         // console.log(new Date(res.url_status[0].time));
         // res.url_status[0].time = new Date(res.url_status[0].time)
         return res
-    } catch (error) {console.log(error);
+    } catch (error) {
         if(error.code == 11000)
             throw Response.UserAlreayExist;
         else throw Response.UnexpectedError;

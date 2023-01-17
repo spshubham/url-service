@@ -39,7 +39,7 @@ describe("test_url_service_add",()=>{
         addStub.throws("error")
         validateURLReqStub.returns({isValid:true});
         let body = {"url_name": "sp.com","frequency":1}
-        urlService.addUrl(body).catch(function(err){console.log(err);
+        urlService.addUrl(body).catch(function(err){
             expect(err.code).to.be.equals(500)
         })
     })
@@ -105,7 +105,7 @@ describe("test_url_service_list",()=>{
         addStub.returns("url added")
      
         let res = await urlService.listUrl()
-        console.log(res);
+
         expect(res).to.be.equals("url added")
     })
     it("test_user_service_list_url_not_found",async()=>{
@@ -186,7 +186,7 @@ describe("test_url_service_trackURL",()=>{
     })
     it("test_url_service_trackURL_unexpected_error",async()=>{
         addStub.throws("error")
-        urlService.trackUrl("63c4e189ca3c78a13c4671d9", "63c4e189ca3c78a13c4671d9").catch(function(err){console.log(err);
+        urlService.trackUrl("63c4e189ca3c78a13c4671d9", "63c4e189ca3c78a13c4671d9").catch(function(err){
             expect(err.code).to.be.equals(500)
         })
     })

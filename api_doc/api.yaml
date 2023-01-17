@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
-  title: User service
+  title: URL service
   description: |-
-    This is a sample user service
+    This is a sample url service
   version: 1.0.0
 
 servers:
-  - url: http://localhost:8181
+  - url: https://url-service.onrender.com
 tags:
   - name: user
     description: Operations about user
@@ -69,7 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: '#/components/schemas/User'
+                 $ref: '#/components/schemas/login'
         '400':
           description: Invalid username/password supplied
  
@@ -274,6 +274,15 @@ components:
           type: integer
           format: int32
           example: 1
+    login:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "login successful"
+        toke:
+          type: string
+          example: "as3sdsdjlkd9s"
     BadRequestResponse:
       type: object
       properties:

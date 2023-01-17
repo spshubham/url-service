@@ -42,7 +42,7 @@ exports.updateUrl = async function (body, user_id, url_id) {
       return Response.URLUpdated;
     else return Response.RecordNotFound
   } catch (error) {
-    console.log(error);
+
     if (error.code) throw error
     else throw Response.UnexpectedError;
   }
@@ -56,7 +56,7 @@ exports.listUrl = async function (user_id) {
     else return Response.RecordNotFound
 
   } catch (error) {
-    console.log(error);
+
     if (error.code) throw error
     else throw Response.UnexpectedError;
   }
@@ -71,7 +71,7 @@ exports.removeUrl = async function (user_id, url_id) {
       return Response.URLDeleted;
     else return Response.RecordNotFound
   } catch (error) {
-    console.log(error);
+
     if (error.code) throw error
     else throw Response.UnexpectedError;
   }

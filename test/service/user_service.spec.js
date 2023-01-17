@@ -32,7 +32,7 @@ describe("test_user_service_signup",()=>{
     it("test_user_service_register_user_fail_for_unexpected_error",async()=>{
         createStub.throws("error")
         let body = {}
-        userService.signUp(body).catch(function(err){console.log(err);
+        userService.signUp(body).catch(function(err){;
             expect(err.code).to.be.equals(500)
         })
     })

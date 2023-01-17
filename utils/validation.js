@@ -25,7 +25,7 @@ exports.isValidRegisterUserBody = (body) =>{
                 payload : response.InvalidEmail
             }
         }
-        if(typeof body.name != "string" || body.name.trim().length < 1 ){console.log(27);
+        if(typeof body.name != "string" || body.name.trim().length < 1 ){
             return {
                 isValid : false,
                 payload : response.InvalidUserName
