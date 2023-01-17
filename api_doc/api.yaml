@@ -269,7 +269,7 @@ components:
       properties:
         url_name:
           type: string
-          example: https://editor.swagger.io/
+          example: https://stackoverflow.com/
         frequency:
           type: integer
           format: int32
