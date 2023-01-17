@@ -1,0 +1,306 @@
+openapi: 3.0.3
+info:
+  title: User service
+  description: |-
+    This is a sample user service
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8181
+tags:
+  - name: user
+    description: Operations about user
+paths:
+
+  /v1/user/signup:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: Register a user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  user registered successfully:
+                    value:
+                      message: User Registered Successfully
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+
+  /v1/user/login:
+    get:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      parameters:
+        - name: email
+          in: query
+          description: The email for login
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username/password supplied
+ 
+  /v1/url/add:
+    post:
+      tags:
+        - URL
+      summary: Add URL
+      description: Add URL to track.
+      operationId: addURL
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        description: add url object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/URL'
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  URL added successfully:
+                    value:
+                      message: User Registered Successfully
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+  
+  /v1/url/update:
+    put:
+      tags:
+        - URL
+      summary: Update URL
+      description: Update URL to track.
+      operationId: updateURL
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - name: url_id
+          in: query
+          description: Id of URL
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update url object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/URL'
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  URL updated successfully:
+                    value:
+                      message: updated Successfully
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"              
+  /v1/url/list:
+    get:
+      tags:
+        - URL
+      summary: list URL
+      description: list URL to track.
+      operationId: listeURL
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  URL list:
+                    value:
+                      message: List
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+  /v1/url/remove:
+    delete:
+      tags:
+        - URL
+      summary: delete URL
+      description: delete URL to track.
+      operationId: deleteURL
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - name: url_id
+          in: query
+          description: Id of URL
+          required: true
+          schema:
+            type: string
+
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  deleted successfully:
+                    value:
+                      message: deleted Successfully
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"              
+  /v1/url/track:
+    get:
+      tags:
+        - URL
+      summary: Track URL
+      description: Track URL to track.
+      operationId: trackURL
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - name: url_id
+          in: query
+          description: Id of URL
+          required: true
+          schema:
+            type: string
+
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  deleted successfully:
+                    value:
+                      message: Tracked Successfully
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"     
+components:
+  parameters:
+   AccessToken:
+      name: "x-access-token"
+      in: header
+      description: Access Token.
+      required: true
+      schema:
+        type: string
+  schemas:
+
+    User:
+      type: object
+      properties:
+
+        name:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+        city:
+          type: string
+          example: 'city'
+        age:
+          type: integer
+          description: age
+          format: int32
+          example: 1
+    URL: 
+      type: object
+      properties:
+        url_name:
+          type: string
+          example: https://editor.swagger.io/
+        frequency:
+          type: integer
+          format: int32
+          example: 1
+    BadRequestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Invalid request body.
+      
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+
+  requestBodies:
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+
+   

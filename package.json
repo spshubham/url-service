@@ -1,0 +1,51 @@
+{
+	"name": "user-service",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"prestart": "npm install",
+		"start": "cross-env-shell CONFIG_DIR=$INIT_CWD/conf nodemon index.js",
+		"test": "nyc --all cross-env-shell CONFIG_DIR=../test/conf mocha 'test/**/*.spec.js' --exit --timeout 20000"
+	},
+	"license": "Unlicense",
+	"private": true,
+	"dependencies": {
+		"@nestjs/cli": "^9.1.8",
+		"@nestjs/common": "^9.2.1",
+		"@nestjs/core": "^9.2.1",
+		"async": "^3.2.3",
+		"axios": "^1.2.2",
+		"bcrypt": "^5.1.0",
+		"body-parser": "^1.19.1",
+		"cors": "^2.8.5",
+		"dotenv": "^8.6.0",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.0",
+		"mongoose": "^6.1.5",
+		"morgan": "^1.10.0",
+		"morgan-body": "^2.6.6",
+		"node-cron": "^3.0.2",
+		"reflect-metadata": "^0.1.13",
+		"rxjs": "^7.8.0",
+		"url": "^0.11.0",
+		"util": "^0.12.4",
+		"uuid": "^8.3.2",
+		"winston": "^3.3.3",
+		"zipcodes": "^8.0.0"
+	},
+	"devDependencies": {
+		"axios-mock-adapter": "^1.20.0",
+		"chai": "^4.3.7",
+		"chai-as-promised": "^7.1.1",
+		"cross-env": "^6.0.3",
+		"mocha": "^9.2.2",
+		"mocha-junit-reporter": "^2.0.2",
+		"mochawesome": "^7.0.1",
+		"node-mocks-http": "^1.11.0",
+		"nodemon": "^2.0.15",
+		"nyc": "^15.1.0",
+		"proxyquire": "^2.1.3",
+		"sinon": "^12.0.1",
+		"sinon-chai": "^3.7.0"
+	}
+}
