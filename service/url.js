@@ -6,6 +6,13 @@ const UrlDb = require("../db/url.db");
 const jwt = require('jsonwebtoken');
 const conf = require("../conf/conf")
 
+
+/**
+ * 
+ * @param {*} body 
+ * @param {*} user_id 
+ * @returns add the url in db
+ */
 exports.addUrl = async function (body, user_id) {
   try {
     if (body) {
@@ -27,6 +34,14 @@ exports.addUrl = async function (body, user_id) {
   }
 };
 
+
+/**
+ * 
+ * @param {*} body 
+ * @param {*} user_id 
+ * @param {*} url_id 
+ * @returns update the given url
+ */
 exports.updateUrl = async function (body, user_id, url_id) {
   try {
     if (!validate.isValidMongooseObjectId(url_id))
@@ -48,6 +63,12 @@ exports.updateUrl = async function (body, user_id, url_id) {
   }
 };
 
+
+/**
+ * 
+ * @param {*} user_id 
+ * @returns list the url
+ */
 exports.listUrl = async function (user_id) {
   try {
     const url = await UrlDb.listUrl(user_id);
@@ -61,6 +82,13 @@ exports.listUrl = async function (user_id) {
     else throw Response.UnexpectedError;
   }
 };
+
+/**
+ * 
+ * @param {*} user_id 
+ * @param {*} url_id 
+ * @returns delete the url
+ */
 
 exports.removeUrl = async function (user_id, url_id) {
   try {
@@ -77,6 +105,13 @@ exports.removeUrl = async function (user_id, url_id) {
   }
 };
 
+
+/**
+ * 
+ * @param {*} user_id 
+ * @param {*} url_id 
+ * @returns track the url
+ */
 exports.trackUrl = async function (user_id, url_id) {
   try {
     if (!validate.isValidMongooseObjectId(url_id))

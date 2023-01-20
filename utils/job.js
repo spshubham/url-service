@@ -5,6 +5,7 @@ const constant = require("../utils/constant")
 const conf = require("../conf/conf")
 let min = 1;
 
+
 cron.schedule("*/1 * * * *", function() { 
     try{
     console.log("running a task every 1 min", min);
@@ -24,7 +25,7 @@ cron.schedule("*/1 * * * *", function() {
                 }
                 else
                 {
-                    await Url.findOneAndUpdate({_id:res[i]._id},{$push:{url_status:{status:"Active",time: parseInt(new Date().getTime())}}})
+                    await Url.findOneAndUpdate({_id:res[i]._id},{$push:{url_status:{status:"Inactive",time: parseInt(new Date().getTime())}}})
                 }
             }
             

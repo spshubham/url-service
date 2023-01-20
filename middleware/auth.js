@@ -1,7 +1,13 @@
 const jwt = require("jsonwebtoken");
 const conf = require("../conf/conf")
 
-
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns token verification
+ */
 const verifyToken = (req, res, next) => {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];

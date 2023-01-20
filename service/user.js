@@ -5,6 +5,12 @@ const Userdb = require("../db/user.db")
 const jwt = require('jsonwebtoken');
 const conf = require("../conf/conf")
 
+
+/**
+ * 
+ * @param {*} body 
+ * @returns user signup message
+ */
 exports.signUp = async function (body) {
   try {
     let valid = validate.isValidRegisterUserBody(body);
@@ -13,15 +19,7 @@ exports.signUp = async function (body) {
     }
     
     const user = await Userdb.create(body);
-    // const token = jwt.sign(
-    //   { user_id: user._id, email:body.email },
-    //   conf.JWT_SECRET_KEY,
-    //   {
-    //     expiresIn: "2m",
-    //   }
-    // );
-    // // save user token
-    // user.token = token;
+
     return user
   } catch (error) {
     if (error.code) throw error
@@ -29,7 +27,12 @@ exports.signUp = async function (body) {
   }
 };
 
-
+/**
+ * 
+ * @param {*} email 
+ * @param {*} password 
+ * @returns details of user
+ */
 exports.getDetails = async function (email, password) {
   try {
 

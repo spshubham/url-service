@@ -3,7 +3,12 @@ const Response = require("../utils/response");
 const bcrypt = require("bcrypt")
 const ObjectId = require("mongoose").Types.ObjectId
 
-
+/**
+ * 
+ * @param {*} body 
+ * @param {*} user_id 
+ * @returns url added message
+ */
 exports.addUrl = async(body, user_id) =>{
     try {
         body.user_id=user_id;
@@ -17,6 +22,13 @@ exports.addUrl = async(body, user_id) =>{
     }
 }
 
+/**
+ * 
+ * @param {*} body 
+ * @param {*} user_id 
+ * @param {*} url_id 
+ * @returns update the url
+ */
 exports.updateUrl = async(body, user_id, url_id) =>{
     try {
         let query={
@@ -33,7 +45,11 @@ exports.updateUrl = async(body, user_id, url_id) =>{
         else throw Response.UnexpectedError;
     }
 }
-
+/**
+ * 
+ * @param {*} user_id 
+ * @returns  list of urls
+ */
 exports.listUrl = async(user_id) =>{
     try {
         let res = await Url.find({user_id:ObjectId(user_id)}).select({"_id":1,"url_name":1})
@@ -45,7 +61,12 @@ exports.listUrl = async(user_id) =>{
     }
 }
 
-
+/**
+ * 
+ * @param {*} user_id 
+ * @param {*} url_id 
+ * @returns remove the urls
+ */
 exports.removeUrl = async(user_id, url_id) =>{
     try {
         let res = await Url.deleteOne({_id:url_id,user_id:user_id})
@@ -57,14 +78,16 @@ exports.removeUrl = async(user_id, url_id) =>{
     }
 }
 
+/**
+ * 
+ * @param {*} user_id 
+ * @param {*} url_id 
+ * @returns track the url
+ */
 exports.trackUrl = async(user_id, url_id) =>{
     try {
          let res = await Url.findOne({_id:url_id,user_id:user_id}).select({"url_name":1,"url_status.time":1,"url_status.status":1,"_id":0})
-        //  res.url_status.forEach(function (doc) {console.log(new Date(doc.time));
-        //     doc.time = new Date(doc.time)
-        //   })
-        // console.log(new Date(res.url_status[0].time));
-        // res.url_status[0].time = new Date(res.url_status[0].time)
+
         return res
     } catch (error) {
         if(error.code == 11000)

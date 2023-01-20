@@ -2,6 +2,12 @@
 const User = require("../models/user.model");
 const Response = require("../utils/response");
 const bcrypt = require("bcrypt")
+
+/**
+ * 
+ * @param {*} body 
+ * @returns user registered message
+ */
 exports.create = async(body) =>{
     try {
         let pass = body.password;
@@ -18,6 +24,13 @@ exports.create = async(body) =>{
         else throw Response.UnexpectedError;
     }
 }
+
+/**
+ * 
+ * @param {*} email 
+ * @param {*} password 
+ * @returns finds the valid user
+ */
 exports.findByEmailAndPassword = async(email, password) => {
     try {
         
@@ -27,7 +40,7 @@ exports.findByEmailAndPassword = async(email, password) => {
         const result = await bcrypt.compare(password,user.password);
         if(!result) { throw Response.InvalidUserAndMail;}
         return user;
-    } catch (error) {
+    } catch (error) {console.log(error);
         if(error.code)
             throw error;
         else

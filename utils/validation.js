@@ -2,14 +2,31 @@ const { default: mongoose } = require("mongoose");
 const emailRegex = /^[\w-\.\+]+@([\w-]+\.)+[\w-]{2,5}$/;
 const response = require("./response");
 const URL = require("url").URL;
+
+/**
+ * 
+ * @param {*} id 
+ * @returns validate the mongoId
+ */
 exports.isValidMongooseObjectId = (id) => {
     return mongoose.isValidObjectId(id);
 }
 
+/**
+ * 
+ * @param {*} email 
+ * @returns valid the email
+ */
 exports.isEmail = (email) =>{
     return emailRegex.test(email);
 }
 
+
+/**
+ * 
+ * @param {*} body 
+ * @returns valida the req.body
+ */
 exports.isValidRegisterUserBody = (body) =>{
     try{    
         
